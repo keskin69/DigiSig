@@ -1,7 +1,7 @@
 var wrapper = document.getElementById("signature-pad"), clearButton = wrapper
 		.querySelector("[data-action=clear]"), saveButton = wrapper
 		.querySelector("[data-action=save]"), canvas = wrapper
-		.querySelector("canvas"), signaturePad;
+		.querySelector("canvas"), imgFile = document.getElementById("imgFile").value, signaturePad;
 
 // Adjust canvas coordinate space taking into account pixel ratio,
 // to make it look crisp on mobile devices.
@@ -17,13 +17,13 @@ function resizeCanvas() {
 }
 
 function downloadFile(fileName, urlData) {
+	var aLink = document.createElement('a');
+	var evt = document.createEvent("HTMLEvents");
 
-    var aLink = document.createElement('a');
-    var evt = document.createEvent("HTMLEvents");
-    evt.initEvent("click");
-    aLink.download = fileName;
-    aLink.href = urlData;
-    aLink.dispatchEvent(evt);
+	evt.initEvent("click");
+	aLink.download = fileName;
+	aLink.href = urlData;
+	aLink.dispatchEvent(evt);
 }
 
 window.onresize = resizeCanvas;
@@ -37,21 +37,13 @@ clearButton.addEventListener("click", function(event) {
 
 saveButton.addEventListener("click", function(event) {
 	if (signaturePad.isEmpty()) {
-		alert("Please provide signature first.");
+		alert("Please provide your signature first");
 	} else {
 		console.log('Save Signature button clicked!');
 		var image = signaturePad.toDataURL("image/png").replace("image/png",
 				"image/octet-stream");
-		// here is the most important part because if you don't replace you will
-		// get a DOM 18 exception.
-		downloadFile("test.png", image);
-		
-		// upload to google drive
-		var uploader = new MediaUploader({
-			  file: "test.png",
-			  token: accessToken,
-			});
-			uploader.upload();
-		console.log("DONE");
+
+		downloadFile(imgFile + ".png", image);
+		window.close();
 	}
 });

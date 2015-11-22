@@ -48,7 +48,7 @@
 			var row = table.rows[selectedRow];
 			// column value = row.cells[j]
 			var bNumber = getHeader("Booking Number");
-			window.location = "signature.jsp?bNumber=" + bNumber;
+			window.location = "form.jsp?bNumber=" + bNumber;
 		}
 	</script>
 
