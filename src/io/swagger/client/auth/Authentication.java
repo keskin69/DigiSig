@@ -1,9 +1,9 @@
 package io.swagger.client.auth;
 
-import io.swagger.client.Pair;
-
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
+import io.swagger.client.Pair;
 
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-16T13:57:18.496Z")
 public interface Authentication {

@@ -1,16 +1,13 @@
 package io.swagger.client.model;
 
-import io.swagger.client.StringUtil;
-import io.swagger.client.model.PriceRate;
-import io.swagger.client.model.BookingLimit;
-import java.util.*;
-import io.swagger.client.model.Duration;
-import io.swagger.client.model.Image;
+import java.util.ArrayList;
+import java.util.List;
 
-
-
-import io.swagger.annotations.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.client.StringUtil;
 
 
 @ApiModel(description = "")

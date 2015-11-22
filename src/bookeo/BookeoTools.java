@@ -1,13 +1,9 @@
 package bookeo;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
-
 import java.util.Calendar;
 import java.util.Date;
-
-import org.apache.commons.io.IOUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,18 +22,17 @@ public class BookeoTools extends Table {
 	private String pageNavigationToken = null;
 
 	public BookeoTools() {
-		gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").create();
+		gson = new GsonBuilder().setDateFormat(Config.API_DATE).create();
 	}
 
 	public void getTodayBookings() {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 
-		cal.add(Calendar.DATE, 1);
+		cal.add(Calendar.DATE, 10);
 		String endTime = "endTime=" + Config.URLDATE.format(cal.getTime());
 
-		cal.add(Calendar.MONTH, -1);
-		cal.add(Calendar.DATE, 1);
+		cal.add(Calendar.DATE, -20);
 		String startTime = "startTime=" + Config.URLDATE.format(cal.getTime());
 
 		String urlParam = startTime + "&" + endTime;
@@ -51,7 +46,7 @@ public class BookeoTools extends Table {
 		addHiddenHeader("E-Mail");
 		addHiddenHeader("Address");
 		addHiddenHeader("Phone");
-		
+
 		getNextPage(urlParam, null);
 	}
 
@@ -59,7 +54,7 @@ public class BookeoTools extends Table {
 		String response = null;
 		String urlStr = null;
 
-/*		if ((pageNavigationToken == null) && (pageNumber == null)) {
+		if ((pageNavigationToken == null) && (pageNumber == null)) {
 			urlStr = param;
 		} else if ((pageNavigationToken != null) && (pageNumber != null)) {
 			urlStr = "pageNavigationToken=" + pageNavigationToken + "&pageNumber=" + pageNumber;
@@ -67,15 +62,16 @@ public class BookeoTools extends Table {
 
 		try {
 			URL url = new URL(Config.APIBASE + "&" + urlStr);
-			response = IOUtils.toString(new InputStreamReader(url.openStream()));
-			// System.out.println(response);
-			//Utils.writeObject(response);
+			response = (String) Utils.readObject();
+			//response = IOUtils.toString(new InputStreamReader(url.openStream()));
+			System.out.println(response);
+			// Utils.writeObject(response);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 
-		response = (String) Utils.readObject();
+		
 		BookingsList bookingsList = gson.fromJson(response, BookingsList.class);
 		processPage(bookingsList);
 
@@ -106,7 +102,7 @@ public class BookeoTools extends Table {
 					addCol(pStr);
 
 					addCol(booking.getTitle());
-					
+
 					addCol("");
 					addCol("");
 					addCol("");

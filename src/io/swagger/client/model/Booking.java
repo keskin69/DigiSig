@@ -1,19 +1,14 @@
 package io.swagger.client.model;
 
-import io.swagger.client.StringUtil;
-import io.swagger.client.model.BookingOption;
-import io.swagger.client.model.Payment;
-import io.swagger.client.model.Customer;
-import io.swagger.client.model.Price;
-import io.swagger.client.model.Resource;
-import java.util.*;
-import io.swagger.client.model.Participants;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-
-
-import io.swagger.annotations.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.client.StringUtil;
 
 
 /**

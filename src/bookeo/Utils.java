@@ -1,24 +1,35 @@
 package bookeo;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 public class Utils {
-	public static void writeObject(Object obj) {
 
-		ObjectOutputStream oos = null;
+	public static HttpResponse postJSON(String json) {
+		HttpResponse response = null;
+		HttpClient httpClient = HttpClientBuilder.create().build();
 		try {
-			FileOutputStream fout = new FileOutputStream("C:\\Mustafa\\workspace\\DigiSig\\bookings.ser");
-			oos = new ObjectOutputStream(fout);
-			oos.writeObject(obj);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			HttpPost post = new HttpPost(Config.APIBASE);
+			StringEntity postingString = new StringEntity(json);
+
+			post.setEntity(postingString);
+			post.setHeader("Content-type", "application/json");
+			response = httpClient.execute(post);
+			
+			System.out.println(response.getStatusLine().getStatusCode());
+			System.out.println(response.getStatusLine().getReasonPhrase());
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 
+		return response;
 	}
 
 	public static Object readObject() {
@@ -28,6 +39,7 @@ public class Utils {
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			try {
 				obj = ois.readObject();
+				ois.close();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -36,6 +48,7 @@ public class Utils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return obj;
 	}
 }

@@ -1,15 +1,17 @@
 package io.swagger.client.api;
 
-import io.swagger.client.ApiException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import io.swagger.client.ApiClient;
+import io.swagger.client.ApiException;
 import io.swagger.client.Configuration;
 import io.swagger.client.Pair;
 import io.swagger.client.TypeRef;
-
-import io.swagger.client.model.WebhooksList;
 import io.swagger.client.model.Webhook;
-
-import java.util.*;
+import io.swagger.client.model.WebhooksList;
 
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-16T13:57:18.496Z")
 public class WebhooksApi {

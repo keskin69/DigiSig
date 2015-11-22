@@ -1,19 +1,21 @@
 package io.swagger.client.api;
 
-import io.swagger.client.ApiException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import io.swagger.client.ApiClient;
+import io.swagger.client.ApiException;
 import io.swagger.client.Configuration;
 import io.swagger.client.Pair;
 import io.swagger.client.TypeRef;
-
 import io.swagger.client.model.ApiKeyInfo;
 import io.swagger.client.model.Business;
 import io.swagger.client.model.LanguagesList;
 import io.swagger.client.model.PeopleCategoryList;
 import io.swagger.client.model.ProductList;
 import io.swagger.client.model.ResourceTypesList;
-
-import java.util.*;
 
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2015-11-16T13:57:18.496Z")
 public class SettingsApi {
