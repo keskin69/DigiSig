@@ -12,33 +12,26 @@ import io.swagger.client.model.PeopleNumber;
 
 public class CreateBooking {
 
-	@SuppressWarnings("unused")
-	private Customer createCustomer() {
+	private Customer createCustomer(String name, String lastName, String eMail) {
 		Customer customer = new Customer();
-		customer.setFirstName("Ali");
-		customer.setLastName("02");
-		customer.setEmailAddress("ali@b.com");
+		customer.setFirstName(name);
+		customer.setLastName(lastName);
+		customer.setEmailAddress(eMail);
+		customer.setCustomFields(null);
+		customer.setPhoneNumbers(null);
 
 		return customer;
 	}
 
-	private Booking createBooking() {
+	private Booking createBooking(Customer customer, String product, String date, String time) {
 		Booking booking = new Booking();
-		booking.setBookingNumber(new Long(System.currentTimeMillis()).toString());
 
-		// Date startDate;
-		// startDate = Config.SHORTDATE.parse("2015-11-23");
-		// booking.setStartTime(startDate);
-		// booking.setEndTime(startDate);
+		String productId = ProductTools.getInstance().getProductId(product);
+		String eventId = new EventTools().getEventId(productId, date, time);
 
-		booking.setProductId("3250FA4EEM151258093DA");
-		booking.setEventId("3250FA4EEM151258093DA_3250X46R44151258093DA_2015-11-23");
-		Customer customer = new Customer();
-		customer.setFirstName("John");
-		customer.setLastName("Smith1");
-		customer.setEmailAddress("jsmith@google.com");
-		customer.setCustomFields(null);
-		customer.setPhoneNumbers(null);
+		booking.setProductId(productId);
+		booking.setEventId(eventId);
+
 		booking.setCustomer(customer);
 		booking.setInitialPayments(null);
 		booking.setCouponCodes(null);
@@ -84,8 +77,9 @@ public class CreateBooking {
 
 	public static void main(String[] args) {
 		CreateBooking test = new CreateBooking();
-		 //test.postCustomer(test.createCustomer());
 
-		test.postBooking(test.createBooking());
+		Customer testCustomer = test.createCustomer("Custo", "Santa", "santa@gmail.com");
+		// test.postCustomer(testCustomer);
+		test.postBooking(test.createBooking(testCustomer, "Tour", "2015-11-27", "09:00"));
 	}
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="bookeo.BookeoTools"%>
+<%@ page import="bookeo.BookingTools"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <link rel="stylesheet" type="text/css" href="css/TableCSSCode.css">
@@ -12,7 +12,7 @@
 <body>
 	<div class="booking-div">
 		<%
-			BookeoTools bookings = new BookeoTools();
+			BookingTools bookings = new BookingTools();
 			bookings.getTodayBookings();
 			String result = bookings.getHTML("BookingTable");
 
@@ -23,7 +23,7 @@
 	<script type="text/javascript">
 		var selectedRow = 0;
 		var table = document.getElementById("BookingTable");
-		
+
 		onload = function() {
 			if (!document.getElementsByTagName || !document.createTextNode)
 				return;

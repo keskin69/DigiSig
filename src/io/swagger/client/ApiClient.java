@@ -557,12 +557,19 @@ public class ApiClient {
 	 */
 	public <T> T invokeAPI(String path, String method, List<Pair> queryParams, Object body, byte[] binaryBody,
 			Map<String, String> headerParams, Map<String, Object> formParams, String accept, String contentType,
-			String[] authNames, TypeRef returnType) throws ApiException {
+			String[] authNames, TypeRef<?> returnType) throws ApiException {
 		// @UPDATED
-		System.out.println(json.serialize(body));
-		HttpResponse r = Utils.postJSON(json.serialize(body));
+		// TODO There is a problem with POST action via Jackson
+		if (method.equals("POST")) {
+			HttpResponse r = Utils.postJSON(json.serialize(body));
+			statusCode = r.getStatusLine().getStatusCode();
+			System.out.println(path + ":" + method + " " + statusCode);
+			System.out.println(json.serialize(body));
 
-		if (r != null) {
+			if (statusCode != 201) {
+				throw new ApiException(statusCode, r.getStatusLine().getReasonPhrase());
+			}
+
 			return null;
 		}
 
@@ -575,7 +582,7 @@ public class ApiClient {
 		if (response.getStatusInfo() == ClientResponse.Status.NO_CONTENT) {
 			return null;
 		} else if (response.getStatusInfo().getFamily() == Family.SUCCESSFUL) {
-			System.out.println("SUCCESS");
+			System.out.println(path + ":" + method + " SUCCESS");
 
 			if (returnType == null)
 				return null;

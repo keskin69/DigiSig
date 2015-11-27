@@ -12,7 +12,7 @@ import io.swagger.client.model.Booking;
 import io.swagger.client.model.BookingsList;
 import io.swagger.client.model.PeopleNumber;
 
-public class BookeoTools extends Table {
+public class BookingTools extends Table {
 
 	/**
 	 * 
@@ -21,7 +21,7 @@ public class BookeoTools extends Table {
 	private Gson gson = null;
 	private String pageNavigationToken = null;
 
-	public BookeoTools() {
+	public BookingTools() {
 		gson = new GsonBuilder().setDateFormat(Config.API_DATE).create();
 	}
 
@@ -114,7 +114,7 @@ public class BookeoTools extends Table {
 	}
 
 	public static void main(String args[]) {
-		BookeoTools bookings = new BookeoTools();
+		BookingTools bookings = new BookingTools();
 		bookings.getTodayBookings();
 		System.out.println(bookings.getHTML("Table1"));
 	}
