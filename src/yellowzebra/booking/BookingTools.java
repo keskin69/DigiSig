@@ -8,6 +8,7 @@ import java.util.Date;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import io.swagger.client.Utils;
 import io.swagger.client.model.Booking;
 import io.swagger.client.model.BookingsList;
 import io.swagger.client.model.PeopleNumber;
