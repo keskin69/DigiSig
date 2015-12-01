@@ -1,4 +1,4 @@
-package bookeo;
+package yellowzebra.booking;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

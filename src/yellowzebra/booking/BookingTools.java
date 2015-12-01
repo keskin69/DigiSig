@@ -1,4 +1,4 @@
-package bookeo;
+package yellowzebra.booking;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,10 +29,10 @@ public class BookingTools extends Table {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 
-		cal.add(Calendar.DATE, 10);
+		cal.add(Calendar.DATE, 1);
 		String endTime = "endTime=" + Config.URLDATE.format(cal.getTime());
 
-		cal.add(Calendar.DATE, -20);
+		cal.add(Calendar.DATE, -1);
 		String startTime = "startTime=" + Config.URLDATE.format(cal.getTime());
 
 		String urlParam = startTime + "&" + endTime;

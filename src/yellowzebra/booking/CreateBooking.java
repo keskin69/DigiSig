@@ -1,4 +1,4 @@
-package bookeo;
+package yellowzebra.booking;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import io.swagger.client.model.PeopleNumber;
 
 public class CreateBooking {
 
-	private Customer createCustomer(String name, String lastName, String eMail) {
+	private static Customer createCustomer(String name, String lastName, String eMail) {
 		Customer customer = new Customer();
 		customer.setFirstName(name);
 		customer.setLastName(lastName);
@@ -23,7 +23,7 @@ public class CreateBooking {
 		return customer;
 	}
 
-	private Booking createBooking(Customer customer, String product, String date, String time) {
+	private static Booking createBooking(Customer customer, String product, String date, String time) {
 		Booking booking = new Booking();
 
 		String productId = ProductTools.getInstance().getProductId(product);
@@ -51,7 +51,7 @@ public class CreateBooking {
 		return booking;
 	}
 
-	public void postCustomer(Customer newCustomer) {
+	public static void postCustomer(Customer newCustomer) {
 		CustomersApi customerApi = new CustomersApi();
 		try {
 			// update customerApi String[] authNames = new String[] { "keyAuth",
@@ -63,23 +63,23 @@ public class CreateBooking {
 		}
 	}
 
-	public void postBooking(Booking newBooking) {
+	public static void postBooking(Booking newBooking) throws ApiException {
 		BookingsApi bookingApi = new BookingsApi();
+
+		// update bookingApi String[] authNames = new String[] { "keyAuth",
+		// "secretKey" };
+		bookingApi.bookingsPost(newBooking, "", false, false, false, false);
+
+	}
+
+	public static void main(String[] args) {
+		Customer testCustomer = CreateBooking.createCustomer("Custo", "Santa", "santa@gmail.com");
+		// test.postCustomer(testCustomer);
 		try {
-			// update bookingApi String[] authNames = new String[] { "keyAuth",
-			// "secretKey" };
-			bookingApi.bookingsPost(newBooking, "", false, false, false, false);
+			CreateBooking.postBooking(CreateBooking.createBooking(testCustomer, "Tour", "2015-11-27", "09:00"));
 		} catch (ApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public static void main(String[] args) {
-		CreateBooking test = new CreateBooking();
-
-		Customer testCustomer = test.createCustomer("Custo", "Santa", "santa@gmail.com");
-		// test.postCustomer(testCustomer);
-		test.postBooking(test.createBooking(testCustomer, "Tour", "2015-11-27", "09:00"));
 	}
 }

@@ -1,4 +1,4 @@
-package bookeo;
+package yellowzebra.booking;
 
 import java.util.ArrayList;
 
